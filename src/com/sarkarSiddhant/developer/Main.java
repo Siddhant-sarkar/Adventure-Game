@@ -38,39 +38,45 @@ public class Main {
 //        locations.get(5).addExit("Q", 0);
 
         int loc = 1;
-//        while(true) {
-//            System.out.println(locations.get(loc).getDescription());
-//            if(loc == 0) {
-//                break;
-//            }
-//
-//            Map<String, Integer> exits = locations.get(loc).getExits();
-//            System.out.print("Available exits are ");
-//            for(String exit: exits.keySet()) {
-//                System.out.print(exit + ", ");
-//            }
-//            System.out.println();
-//
-//            String direction = scanner.nextLine().toUpperCase();
-//
-//            if(exits.containsKey(direction)) {
-//                loc = exits.get(direction);
-//
-//            } else {
-//                System.out.println("You cannot go in that direction");
-//            }
-//        }
+        while(true) {
+            System.out.println(locations.get(loc).getDescription());
+            if(loc == 0) {
+                break;
+            }
 
-        String[] road = "You are standing at the end of a road before a small brick building".split(" ");
-        for (String i : road) {
-            System.out.println(i);
+            Map<String, Integer> exits = locations.get(loc).getExits();
+            System.out.print("Available exits are ");
+            for(String exit: exits.keySet()) {
+                System.out.print(exit + ", ");
+            }
+            System.out.println();
+
+            String direction = scanner.nextLine().toUpperCase();
+            String finalDirection=directionTeller(direction.split(" "));
+
+
+            if(exits.containsKey(finalDirection)) {
+                loc = exits.get(finalDirection);
+
+            } else {
+                System.out.println("You cannot go in that direction");
+            }
         }
-
-        System.out.println("==================================");
-
-        String[] building = "You are inside a building, a well house for a small spring".split(", ");
-        for (String i : building) {
-            System.out.println(i);
+    }
+    public static String directionTeller(String[]test){
+        for (int i=0;i<test.length;i++){
+            if ((test[i].toUpperCase().equals("NORTH"))){
+                return "N";
+            }else if ((test[i].toUpperCase().equals("EAST"))){
+                return "E";
+            }else if ((test[i].toUpperCase().equals("WEST"))){
+                return "W";
+            }else if ((test[i].toUpperCase().equals("SOUTH"))){
+                return "S";
+            }else if ((test[i].toUpperCase().equals("QUIT"))){
+                return "Q";
+            }
         }
+        return null;
     }
 }
